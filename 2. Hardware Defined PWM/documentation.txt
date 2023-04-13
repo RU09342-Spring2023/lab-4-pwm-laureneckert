@@ -1,0 +1,27 @@
+
+#Overview
+
+This code drives an RGB LED using pins 6.0, 6.1, and 6.2 with a PWM period of 1ms. The RGB LED cycles between six colors in the order: Red, Orange, Green, Cyan, Blue, and Purple. The amount of colors between the main six colors is adjustable for a smooth color transition.
+
+#Features
+
+- Drives RGB LED with pins 6.0, 6.1, and 6.2
+- PWM period of 1ms
+- Cycles between six colors: Red, Orange, Green, Cyan, Blue, and Purple
+- Adjustable amount of colors between the main six colors for a smooth color transition
+
+#Functions
+
+- LEDSetup(): Initializes LED pins and enables interrupts
+- TimerSetup(): Initializes the timer for PWM and interrupts
+- Timer1_B0_ISR(): Interrupt service routine for handling LED transitions
+
+#Usage
+
+- Connect an RGB LED to pins 6.0, 6.1, and 6.2
+- Run the code on the MSP430 microcontroller
+- Observe the LED cycling between the six colors in order
+
+#Note
+
+- Avoid setting TB3CCR1, TB3CCR2, or TB3CCR3 to values greater than PERIOD, as this may cause unexpected behavior.

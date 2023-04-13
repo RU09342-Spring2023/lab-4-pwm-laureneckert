@@ -1,0 +1,33 @@
+#Software Defined PWM Signal Generator
+
+This code generates a pulse width modulation (PWM) signal at 1kHz with a duty cycle between 0% and 100%. Two on-board LEDs are PWM'd with a 50% duty cycle upon the processor starting up. The duty cycle of the LEDs increases by 10% when one of the on-board buttons is pressed. Once the duty cycle reaches 100%, the next button press resets the duty cycle back to 0%.
+
+Button 2.1 controls LED 1.0, while button 4.3 controls LED 6.6.
+
+#Features
+- 1kHz PWM signal generator
+- Duty cycle adjustable between 0% and 100%
+- On-board LEDs PWM'd at 50% duty cycle upon startup
+- Duty cycle increases by 10% upon button press
+- LED 1.0 controlled by button 2.1
+- LED 6.6 controlled by button 4.3
+
+#Functions
+
+- void LEDSetup()
+Initializes the red (P1.0) and green (P6.6) on-board LEDs as outputs.
+
+- void ButtonSetup()
+Initializes button P2.3 and P4.1 as inputs with pull-up resistors, sets the low-to-high edge for each button, and enables interrupts.
+
+- void TimerB0Setup()
+Initializes Timer B0 with SMCLK as the source clock, up mode, and a 1kHz frequency. Duty cycle for the red LED (P1.0) and green LED (P6.6) is set to 50%. Interrupts are enabled for CCR1 and CCR2.
+
+- __interrupt void Port_2(void)
+Interrupt service routine for button P2.3. Increments duty cycle for the red LED by 10%, up to a maximum of 100%. Once 100% is reached, duty cycle is reset to 0% on the next button press.
+
+- __interrupt void Port_4(void)
+Interrupt service routine for button P4.1. Increments duty cycle for the green LED by 10%, up to a maximum of 100%. Once 100% is reached, duty cycle is reset to 0% on the next button press.
+
+__interrupt void Timer0_B1_ISR(void)
+Interrupt service routine for Timer B0. Toggles the state of the red (P1.0) and green (P6.6) LEDs based on the duty cycle.

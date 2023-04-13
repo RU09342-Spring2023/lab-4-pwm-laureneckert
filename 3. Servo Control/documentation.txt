@@ -1,0 +1,51 @@
+#Servo Control
+
+- This code controls a servo motor connected to a pin on a MSP430 microcontroller using two buttons connected to other pins on the microcontroller.
+
+- The code uses Timer B3 to generate a PWM signal to control the position of the servo motor. The PWM signal's duty cycle determines the position of the servo, and it is controlled by changing the value of TB3CCR1 register. The code also sets the frequency of the PWM signal to 50 Hz, with an initial duty cycle of 1.5 ms.
+
+- The servo motor is connected to P6.0, which is configured as a Timer B3 capture/compare input. The code initializes this pin to be an output pin, sets it to LOW, and configures it for peripheral function.
+
+- The two buttons, located on P2.3 and P4.1, are used to control the position of the servo motor. When the button on P2.3 is pressed, the duty cycle is decreased by 5% to move the servo motor to the left. When the button on P4.1 is pressed, the duty cycle is increased by 5% to move the servo motor to the right.
+
+- This code is intended to be used with a servo motor that has a limited degree of rotation.
+
+#Getting Started
+
+To use this code:
+- copy it to your MSP430 project
+- connect your servo motor to P6.0
+- use the two buttons on P2.3 and P4.1
+- power the servo motor with an external power supply connected to the ground of the microcontroller
+
+#Prerequisites
+
+This code requires a MSP430 microcontroller, a servo motor, two buttons, and an external power supply for the servo motor.
+
+#Usage
+
+Once the code is uploaded and running on the development board, the user can press the button on the left side of the board to turn the servo counterclockwise and the button on the right side of the board to turn it clockwise.
+
+The servo has a limit to the amount of degrees it can rotate, so the user should not try to move it further once it has reached its maximum or minimum position. If the servo is already at its maximum or minimum position, it will not move further in that direction.
+
+#Functions
+
+The code contains the following functions:
+
+- pinSetup()
+This function initializes the pin for the servo motor.
+
+- ButtonSetup()
+This function initializes the two buttons on the development board.
+
+- TimerB3Setup()
+This function initializes Timer3 on the development board.
+
+- Port_2()
+This function is the interrupt service routine for the button on the left side of the board. It decreases the duty cycle by 5% to move the servo left.
+
+- Port_4()
+This function is the interrupt service routine for the button on the right side of the board. It increases the duty cycle by 5% to move the servo right.
+
+- Timer3_B1_ISR()
+This function is the interrupt service routine for Timer3. It sets the pin for the servo motor to low to end the PWM cycle.
